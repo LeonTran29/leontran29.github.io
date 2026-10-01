@@ -4,6 +4,8 @@ body {
   line-height: 1.6;
   color: #1f2937;
   background-color: #fafaf7;
+  max-width: 720px;
+  margin: 0 auto;
 }
 
 h1 {
