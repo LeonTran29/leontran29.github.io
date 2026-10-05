@@ -25,3 +25,7 @@ article {
   padding: 0 16px;
   margin-bottom: 24px;
 }
+
+article h3 {
+  margin-top: 0;
+}
