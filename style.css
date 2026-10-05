@@ -29,3 +29,12 @@ article {
 article h3 {
   margin-top: 0;
 }
+
+.project-list {
+  display: flex;
+  gap: 16px;
+}
+
+.project-list article {
+  flex: 1;
+}
