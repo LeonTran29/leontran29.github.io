@@ -31,13 +31,15 @@ article h3 {
 }
 
 .project-list {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
 .project-list article {
   flex: 1;
 }
-.project-list.featured{
-  flex: 2;
+
+.project-list .featured {
+  grid-column: span 2;
 }
