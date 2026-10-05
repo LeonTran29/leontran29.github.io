@@ -22,7 +22,7 @@ a {
 
 article {
   border: 1px solid #e5e7eb;
-  padding: 0 16px;
+  padding: 16px;
   margin-bottom: 24px;
 }
 
@@ -37,7 +37,7 @@ article h3 {
 }
 
 .project-list article {
-  flex: 1;
+  margin-bottom: 0;
 }
 
 .project-list .featured {
