@@ -38,3 +38,6 @@ article h3 {
 .project-list article {
   flex: 1;
 }
+.project-list.featured{
+  flex: 2;
+}
