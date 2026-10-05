@@ -41,5 +41,15 @@ article h3 {
 }
 
 .project-list .featured {
-  grid-row: span 2;
+  grid-column: span 2;
+}
+
+@media (max-width: 600px) {
+  .project-list {
+    grid-template-columns: 1fr;
+  }
+
+  .project-list .featured {
+    grid-column: auto;
+  }
 }
