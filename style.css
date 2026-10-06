@@ -53,3 +53,18 @@ article h3 {
     grid-column: auto;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #e5e7eb;
+    background-color: #111827;
+  }
+
+  a {
+    color: #7cb4f5;
+  }
+
+  article {
+    border-color: #374151;
+  }
+}
