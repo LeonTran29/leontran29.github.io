@@ -8,18 +8,59 @@
 </head>
 <body>
     <p><a href="../index.html">← Back to home</a></p>
-    <h1>Olist E-Commerce: Delivery Performance Analysis</h1>
-    <p>Under construction</p>
+    <h1>Olist Delivery Risk Analysis</h1>
+    <p>Delivery risk lives in the tail, not the average. The data points to reliability — keeping the promise date — rather than raw speed as the lever for customer satisfaction.</p>
+    <p>BigQuery SQL · Power BI · Git/GitHub</p>
 
-    <h2>Problem</h2>
-    <h2>Dataset and Method</h2>
-    <h3>Questions</h3>
-    <p>There are 5 questions</p>
-    <h4>Q1 - delivery time</h4>
-    <h4>Q2 - lateness</h4>
-    <h4>Q3 - </h4>
-    <h4>Q4 - </h4>
-    <h4>Q5 - </h4>
-    <h3>Insights</h3>
+    <h2>The average hides the tail</h2>
+    <p>The median order arrives in 10 days. But the slowest 1% (~880 orders) took more than 46 days, and the worst took 209.</p>
+
+    <h2>Key findings</h2>
+    <h3>Satisfaction drops off a cliff, not a slope</h3>
+    <p>Arriving early barely beats arriving on time (4.3 vs 4.1). Crossing the promise date costs about 1.1 points.</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Group</th>
+                <th>Orders</th>
+                <th>Avg review</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Early</td>
+                <td>87,187</td>
+                <td>4.3</td>
+            </tr>
+            <tr>
+                <td>On-time</td>
+                <td>2,754</td>
+                <td>4.1</td>
+            </tr>
+            <tr>
+                <td>1–5 days late</td>
+                <td>2,770</td>
+                <td>2.99</td>
+            </tr>
+            <tr>
+                <td>6–10 days late</td>
+                <td>1,672</td>
+                <td>1.77</td>
+            </tr>
+            <tr>
+                <td>&gt;10 days late</td>
+                <td>2,093</td>
+                <td>1.71</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Lateness is regional, not product-driven</h3>
+    <h3>Stalling appears structural</h3>
+    <h2>What this means</h2>
+    <h2>Dataset and method</h2>
+    <h3>Pipeline</h3>
+    <h3>SQL highlights</h3>
+    <h2>Limitations</h2>
 </body>
 </html>
