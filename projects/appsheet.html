@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Tracking System (AppSheet)</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <p><a href="../index.html">← Back to home</a></p>
+    <h1>Equipment Tracking System for Endoscopy Service</h1>
+    <p class="tagline">Turning scattered repair records into a lookup tool I use in the field.</p>
+
+    <p>At a glance: 150+ devices · 40+ hospitals · 12 equipment categories · 3 linked tables</p>>
+
+    <h2>The problem:</h2>
+    <p>Repair records at ETC Medical were spread across Excel files held by the admin team. 
+        When I was at a hospital and needed a device’s history, I had to ask and wait. 
+        That also meant no one could see patterns: which scopes failed most, and 
+        how often the same fault came back.</p>
+    
+    <h2>What I built:</h2>
+    <p>An AppSheet app on a relational data model with three linked tables:</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Table</th>
+                <th>What it holds</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Product records</th>
+                <th>Each device by hospital, category, serial [?]</th>
+            </tr>
+            <tr>
+                <th>Equipment transitions</th>
+                <th>Every movement: intake, inspection, repair, return</th>
+            </tr>
+            <tr>
+                <th>Contacts</th>
+                <th>Hospital staff linked to each site</th>
+            </tr>
+        </tbody>
+    </table>
+    <p>Records are connected by references, include computed fields, and 
+        every transition carries photos, so the data can be checked against the physical device.</p>
+
+    <h2>Result</h2>
+    <ul>
+        <li>I look up any device’s history on-site in [? vài giây / thay vì bao lâu], without waiting for admin.</li>
+        <li>From the tracked data I analyzed equipment distribution by type, which showed which scope categories move most often.</li>
+        <li>The app is being extended with admin roles so the wider team can use it.</li>
+    </ul>
+
+    <h2>What I learned as a BA</h2>
+    <p>???</p>
+
+    <p><strong>Tools:</strong> AppSheet, Google Sheets, relational data modeling</p>
+    <p class="tagline">Internal tool at ETC Medical. Screenshots have client data hidden.</p>
+</body>
+</html>
