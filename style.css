@@ -67,6 +67,10 @@ article h3 {
   article {
     border-color: #374151;
   }
+
+  th, td {
+    border-color: #374151;
+  }
 }
 
 img {
