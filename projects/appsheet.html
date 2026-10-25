@@ -1,62 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Device Tracking System (AppSheet)</title>
-    <link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Device Tracking System (AppSheet)</title>
+  <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <p><a href="../index.html">← Back to home</a></p>
-    <h1>Equipment Tracking System for Endoscopy Service</h1>
-    <p class="tagline">Turning scattered repair records into a lookup tool I use in the field.</p>
+  <p><a href="../index.html">← Back to home</a></p>
+  <h1>Equipment Tracking System for Endoscopy Service</h1>
+  <p class="tagline">Turning scattered repair records into a lookup tool I use in the field.</p>
 
-    <p>At a glance: 150+ devices · 40+ hospitals · 12 equipment categories · 3 linked tables</p>
+  <p>At a glance: 150+ devices · 40+ hospitals · 12 equipment categories · 3 linked tables</p>
 
-    <h2>The problem:</h2>
-    <p>Repair records at ETC Medical were spread across Excel files held by the admin team. 
-        When I was at a hospital and needed a device’s history, I had to ask and wait. 
-        That also meant no one could see patterns: which scopes failed most, and 
-        how often the same fault came back.</p>
-    
-    <h2>What I built:</h2>
-    <p>An AppSheet app on a relational data model with three linked tables:</p>
-    <table>
-        <thead>
-            <tr>
-                <th>Table</th>
-                <th>What it holds</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Product records</td>
-                <td>Each device by hospital, category, serial [?]</td>
-            </tr>
-            <tr>
-                <td>Equipment transitions</td>
-                <td>Every movement: intake, inspection, repair, return</td>
-            </tr>
-            <tr>
-                <td>Contacts</td>
-                <td>Hospital staff linked to each site</td>
-            </tr>
-        </tbody>
-    </table>
-    <p>Records are connected by references, include computed fields, and 
-        every transition carries photos, so the data can be checked against the physical device.</p>
+  <h2>The problem</h2>
+  <p>Repair history at ETC Medical was not in one place. To check a device's past repairs,
+    I had to ask the engineers around me or the admin team. They usually answered quickly,
+    but it depended on whether they were free, so I was always waiting on someone else.
+    Scattered records also meant no one could easily see patterns: which scopes failed
+    most, and how often the same fault came back.</p>
 
-    <h2>Result</h2>
-    <ul>
-        <li>I look up any device’s history on-site in [? vài giây / thay vì bao lâu], without waiting for admin.</li>
-        <li>From the tracked data I analyzed equipment distribution by type, which showed which scope categories move most often.</li>
-        <li>The app is being extended with admin roles so the wider team can use it.</li>
-    </ul>
+  <h2>What I built</h2>
+  <p>An AppSheet app on a relational data model with three linked tables:</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Table</th>
+        <th>What it holds</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Product records</td>
+        <td>One row per device: serial number, model, manufacture date, owner, and number of repair cases</td>
+      </tr>
+      <tr>
+        <td>Equipment transitions</td>
+        <td>Every movement of a device: task type, status, who sent and received it, start, expected and actual return dates, issues found, and photos (bill + up to 3 device photos)</td>
+      </tr>
+      <tr>
+        <td>Contacts</td>
+        <td>Everyone who sends or receives devices: name, position, organization, contact type, phone and email</td>
+      </tr>
+    </tbody>
+  </table>
+  <img src="../assets/data-model.svg" alt="Data model: Product and Contacts tables linked to Equipment Transitions">
+  <p>Records are connected by references, include computed fields, and every transition
+    carries photos, so the data can be checked against the physical device.</p>
+  <p>Expected and actual return dates are recorded so turnaround time can be measured
+    once enough data builds up.</p>
 
-    <h2>What I learned as a BA</h2>
-    <p>???</p>
+  <h2>Result</h2>
+  <ul>
+    <li>I can check any device's history myself in 3–5 minutes, instead of depending on
+      when a colleague or the admin team is free.</li>
+    <li>From the tracked data I analyzed equipment distribution by type, which showed
+      which scope categories move most often.</li>
+    <li>The app is being extended with admin roles so the wider team can use it.</li>
+  </ul>
 
-    <p><strong>Tools:</strong> AppSheet, Google Sheets, relational data modeling</p>
-    <p class="tagline">Internal tool at ETC Medical. Screenshots have client data hidden.</p>
+  <h2>What I learned as a BA</h2>
+  <p>I did not design the full model up front. I started with a single table of equipment
+    transitions, because that was the work I did every day. Once it was in use, the problems
+    showed up: details like a device's owner were repeated on every transition, and senders
+    and receivers were typed in by hand. So I moved device details into a Product table and
+    people into a Contacts table, then linked them back by reference.</p>
+  <p>The lesson: build something people can use first, then let real data show where the
+    structure is weak. Each table I added solved a problem I had already seen, not one I
+    guessed at.</p>
+
+  <p><strong>Tools:</strong> AppSheet, Google Sheets, relational data modeling</p>
+  <p><em>Internal tool at ETC Medical, not publicly available.</em></p>
 </body>
 </html>
