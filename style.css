@@ -68,3 +68,8 @@ article h3 {
     border-color: #374151;
   }
 }
+
+img {
+  max-width: 100%;
+  height: auto;
+}
