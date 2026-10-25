@@ -73,3 +73,15 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 8px;
+  text-align: left;
+  vertical-align: top;
+}
