@@ -11,13 +11,89 @@
     <h1>Olist Delivery Risk Analysis</h1>
     <p>Delivery risk lives in the tail, not the average. The data points to reliability — keeping the promise date — rather than raw speed as the lever for customer satisfaction.</p>
     <p>BigQuery SQL · Power BI · Git/GitHub</p>
+    <p>An end-to-end analysis of ~100K Brazilian e-commerce orders: a BigQuery SQL pipeline, 8-step data profiling and a Power BI dashboard.</p>
+    <ul>
+        <li><strong>6.77%</strong> of 96,476 delivered orders arrive late</li>
+        <li><strong>4.1 to 2.99</strong> average review score when the promise is missed by 1 to 5 days</li>
+        <li><strong>2.8% to 21.4%</strong> late rate across states, from AM to AL</li>
+    </ul>
 
-    <h2>The average hides the tail</h2>
+    <h2>Q1. The average hides the tail</h2>
     <p>The median order arrives in 10 days. But the slowest 1% (~880 orders) took more than 46 days, and the worst took 209.</p>
 
+    <figure>
+        <div style="overflow-x: auto;">
+            <svg viewBox="0 0 1000 214" role="img" aria-labelledby="ruler-title" fill="none" style="display: block; min-width: 44rem; width: 100%; height: auto;">
+                <title id="ruler-title">Lead time of 96,476 delivered orders on one scale from 0 to 209 days: half of orders arrive between day 6 and day 15, 99% by day 46, and the slowest takes 209 days</title>
+                <!-- scale: x = 120 + days * 4.096 -->
+                <text x="24" y="40" font-size="19" font-weight="700" fill="currentColor">Half of all orders arrive between day 6 and day 15</text>
+                <path d="M144.6 98 V86 H181.4 V98" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M163 86 V50" stroke="currentColor" stroke-width="1"/>
+                <rect x="144.6" y="98" width="36.8" height="24" fill="currentColor" fill-opacity="0.2"/>
+                <path d="M120 110 H308.4" stroke="currentColor" stroke-width="3"/>
+                <path d="M308.4 110 H976" stroke="#c8360f" stroke-width="3"/>
+                <path d="M120 100 V120" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M976 100 V120" stroke="#c8360f" stroke-width="2"/>
+                <text x="120" y="92" font-size="16" text-anchor="middle" fill="currentColor" fill-opacity="0.65">0</text>
+                <path d="M161 98 V122" stroke="currentColor" stroke-width="3"/>
+                <path d="M161 124 V138" stroke="currentColor" stroke-width="1"/>
+                <text x="157" y="156" font-size="18" text-anchor="end" font-weight="600" fill="currentColor">median 10 days</text>
+                <path d="M169.5 124 V174" stroke="currentColor" stroke-opacity="0.5" stroke-width="1" stroke-dasharray="3 3"/>
+                <text x="176" y="188" font-size="18" fill="currentColor" fill-opacity="0.65">mean 12.09, pulled up by the tail</text>
+                <path d="M214.2 100 V120" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M214.2 124 V138" stroke="currentColor" stroke-width="1"/>
+                <text x="222" y="152" font-size="18" fill="currentColor">90% by day 23</text>
+                <path d="M308.4 100 V70" stroke="#c8360f" stroke-width="1.5"/>
+                <text x="316" y="76" font-size="18" font-weight="600" fill="currentColor">99% by day 46</text>
+                <text x="640" y="96" font-size="18" text-anchor="middle" fill="#c8360f">the slowest 1% of orders are spread over days 46 to 209</text>
+                <text x="976" y="142" font-size="18" text-anchor="end" font-weight="600" fill="#c8360f">longest order: 209 days</text>
+            </svg>
+        </div>
+        <figcaption>Lead time of 96,476 delivered orders on a single scale, 0 to 209 days. Everything the average describes happens in the first fifth of the line.</figcaption>
+    </figure>
+
     <h2>Key findings</h2>
-    <h3>Satisfaction drops off a cliff, not a slope</h3>
+    <h3>Q3. Satisfaction drops off a cliff, not a slope</h3>
     <p>Arriving early barely beats arriving on time (4.3 vs 4.1). Crossing the promise date costs about 1.1 points.</p>
+    <figure>
+        <div style="overflow-x: auto;">
+            <svg viewBox="0 0 760 310" role="img" aria-labelledby="cliff-title" fill="none" style="display: block; min-width: 36rem; width: 100%; height: auto;">
+                <title id="cliff-title">Average review score by delivery outcome: early 4.3, on-time 4.1, 1 to 5 days late 2.99, 6 to 10 days late 1.77, more than 10 days late 1.71</title>
+                <path d="M50 210 H760" stroke="currentColor" stroke-opacity="0.15" stroke-width="1"/>
+                <text x="40" y="215" font-size="14" text-anchor="end" fill="currentColor" fill-opacity="0.65">1</text>
+                <path d="M50 170 H760" stroke="currentColor" stroke-opacity="0.15" stroke-width="1"/>
+                <text x="40" y="175" font-size="14" text-anchor="end" fill="currentColor" fill-opacity="0.65">2</text>
+                <path d="M50 130 H760" stroke="currentColor" stroke-opacity="0.15" stroke-width="1"/>
+                <text x="40" y="135" font-size="14" text-anchor="end" fill="currentColor" fill-opacity="0.65">3</text>
+                <path d="M50 90 H760" stroke="currentColor" stroke-opacity="0.15" stroke-width="1"/>
+                <text x="40" y="95" font-size="14" text-anchor="end" fill="currentColor" fill-opacity="0.65">4</text>
+                <path d="M50 50 H760" stroke="currentColor" stroke-opacity="0.15" stroke-width="1"/>
+                <text x="40" y="55" font-size="14" text-anchor="end" fill="currentColor" fill-opacity="0.65">5</text>
+                <rect x="70" y="78" width="100" height="172" fill="#8d97a1"/>
+                <text x="120" y="70" font-size="19" font-weight="700" text-anchor="middle" fill="currentColor">4.3</text>
+                <text x="120" y="274" font-size="17" text-anchor="middle" fill="currentColor">Early</text>
+                <text x="120" y="294" font-size="14" text-anchor="middle" fill="currentColor" fill-opacity="0.65">87,187 orders</text>
+                <rect x="215" y="86" width="100" height="164" fill="#8d97a1"/>
+                <text x="265" y="78" font-size="19" font-weight="700" text-anchor="middle" fill="currentColor">4.1</text>
+                <text x="265" y="274" font-size="17" text-anchor="middle" fill="currentColor">On-time</text>
+                <text x="265" y="294" font-size="14" text-anchor="middle" fill="currentColor" fill-opacity="0.65">2,754 orders</text>
+                <rect x="360" y="130.4" width="100" height="119.6" fill="#c8360f"/>
+                <text x="410" y="122.4" font-size="19" font-weight="700" text-anchor="middle" fill="currentColor">2.99</text>
+                <text x="410" y="274" font-size="17" text-anchor="middle" fill="currentColor">1–5 days late</text>
+                <text x="410" y="294" font-size="14" text-anchor="middle" fill="currentColor" fill-opacity="0.65">2,770 orders</text>
+                <rect x="505" y="179.2" width="100" height="70.8" fill="#c8360f"/>
+                <text x="555" y="171.2" font-size="19" font-weight="700" text-anchor="middle" fill="currentColor">1.77</text>
+                <text x="555" y="274" font-size="17" text-anchor="middle" fill="currentColor">6–10 days late</text>
+                <text x="555" y="294" font-size="14" text-anchor="middle" fill="currentColor" fill-opacity="0.65">1,672 orders</text>
+                <rect x="650" y="181.6" width="100" height="68.4" fill="#c8360f"/>
+                <text x="700" y="173.6" font-size="19" font-weight="700" text-anchor="middle" fill="currentColor">1.71</text>
+                <text x="700" y="274" font-size="17" text-anchor="middle" fill="currentColor">&gt;10 days late</text>
+                <text x="700" y="294" font-size="14" text-anchor="middle" fill="currentColor" fill-opacity="0.65">2,093 orders</text>
+                <path d="M50 250 H760" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+        </div>
+        <figcaption>Average review score (1 to 5) by delivery outcome, across 96,476 delivered orders.</figcaption>
+    </figure>
     <table>
         <thead>
             <tr>
@@ -54,13 +130,98 @@
             </tr>
         </tbody>
     </table>
+    <p>96,476 delivered orders in total. The three late groups add up to the 6,535 late orders (6.77%).</p>
 
-    <h3>Lateness is regional, not product-driven</h3>
-    <h3>Stalling appears structural</h3>
+    <h3>Q2 and Q4. Lateness is regional, not product-driven</h3>
+    <p><strong>Q2, where lateness concentrates.</strong> The late rate ranges from 2.8% (AM) to 21.4% (AL). Among states with at least 500 delivered orders, the worst are MA (17.4%), CE (13.8%) and BA (12.2%). Volume misleads: SP has the most late orders (1,820) but only a 4.5% late rate, while RJ is at 12.1%.</p>
+    <figure>
+        <div style="overflow-x: auto;">
+            <svg viewBox="0 0 760 270" role="img" aria-labelledby="late-title" fill="none" style="display: block; min-width: 36rem; width: 100%; height: auto;">
+                <title id="late-title">Late rate by customer state: MA 17.4%, CE 13.8%, BA 12.2%, RJ 12.1%, SP 4.5%, against 6.77% across all delivered orders</title>
+                <text x="196" y="68" font-size="19" font-weight="700" text-anchor="end" fill="currentColor">MA</text>
+                <text x="196" y="85" font-size="14" text-anchor="end" fill="currentColor" fill-opacity="0.65">717 orders</text>
+                <rect x="210" y="57" width="435" height="26" fill="#c8360f"/>
+                <text x="653" y="76" font-size="18" font-weight="600" fill="currentColor">17.4%</text>
+                <text x="196" y="108" font-size="19" font-weight="700" text-anchor="end" fill="currentColor">CE</text>
+                <text x="196" y="125" font-size="14" text-anchor="end" fill="currentColor" fill-opacity="0.65">1,279 orders</text>
+                <rect x="210" y="97" width="345" height="26" fill="#c8360f"/>
+                <text x="563" y="116" font-size="18" font-weight="600" fill="currentColor">13.8%</text>
+                <text x="196" y="148" font-size="19" font-weight="700" text-anchor="end" fill="currentColor">BA</text>
+                <text x="196" y="165" font-size="14" text-anchor="end" fill="currentColor" fill-opacity="0.65">3,256 orders</text>
+                <rect x="210" y="137" width="305" height="26" fill="#c8360f"/>
+                <text x="523" y="156" font-size="18" font-weight="600" fill="currentColor">12.2%</text>
+                <text x="196" y="188" font-size="19" font-weight="700" text-anchor="end" fill="currentColor">RJ</text>
+                <text x="196" y="205" font-size="14" text-anchor="end" fill="currentColor" fill-opacity="0.65">12,353 orders</text>
+                <rect x="210" y="177" width="302.5" height="26" fill="#c8360f"/>
+                <text x="520.5" y="196" font-size="18" font-weight="600" fill="currentColor">12.1%</text>
+                <text x="196" y="228" font-size="19" font-weight="700" text-anchor="end" fill="currentColor">SP</text>
+                <text x="196" y="245" font-size="14" text-anchor="end" fill="currentColor" fill-opacity="0.65">40,495 orders</text>
+                <rect x="210" y="217" width="112.5" height="26" fill="currentColor" fill-opacity="0.4"/>
+                <text x="330.5" y="236" font-size="18" font-weight="600" fill="currentColor">4.5%</text>
+                <path d="M210 44 V252" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M379.2 40 V252" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4"/>
+                <text x="387.2" y="30" font-size="16" fill="currentColor">6.77% across all delivered orders</text>
+            </svg>
+        </div>
+        <figcaption>Late rate by customer state (late orders divided by delivered orders). Every state shown has at least 500 delivered orders. SP has the most late orders (1,820) but a below-average rate.</figcaption>
+    </figure>
+    <p><strong>Q4, category and seller risk.</strong> Product type matters far less. Most categories sit at 6–8% late, with audio the outlier at 11.6%. Seller state matters more: MA sellers are late on 19.4% of order-lines while every other state is at 7.1% or below. Geography drives delivery risk more than product type.</p>
+
+    <h3>Q5. Stalling appears structural</h3>
+    <p>2,965 orders never arrive: 619 canceled and 2,346 stuck. The stuck ones cluster at two stages, after approval and at the carrier. The stuck rate is flat by state (about 1.4–4%), so this is a process problem, not a regional one.</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Where the order stalled</th>
+                <th>Orders</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>After approval</td>
+                <td>1,227</td>
+            </tr>
+            <tr>
+                <td>At the carrier</td>
+                <td>1,114</td>
+            </tr>
+            <tr>
+                <td>At purchase</td>
+                <td>5</td>
+            </tr>
+        </tbody>
+    </table>
+
     <h2>What this means</h2>
+    <p>Lateness is regional, stalling is structural, and MA is the weak node on both the customer and seller side.</p>
+    <p>The operational target is to keep the promised date, not to be faster: beating the promise barely moves the review score (4.3 vs 4.1), while missing it by 1 to 5 days costs about 1.1 points.</p>
+
     <h2>Dataset and method</h2>
+    <p>The Olist Brazilian E-Commerce dataset from Kaggle: 9 tables, ~100K orders, purchases from September 2016 to October 2018.</p>
     <h3>Pipeline</h3>
+    <ol>
+        <li><code>olist_raw</code>: the 9 Kaggle tables as loaded.</li>
+        <li><code>olist_stg</code>: cleaned, typed and standardized.</li>
+        <li><code>olist_mart</code>: 2 fact tables, <code>fct_order_delivery</code> (one row per order, 99,441) and <code>fct_order_items</code> (one row per order-line, 112,650).</li>
+        <li>Power BI dashboard on top of the mart.</li>
+    </ol>
+    <p>Every table was profiled on 8 checks: volume, primary key, nulls, cardinality, range, domain, referential integrity, business rules. 7 anomalies are logged (DQ-001 to DQ-007), each with a decision, none silently dropped.</p>
+
     <h3>SQL highlights</h3>
+    <ul>
+        <li><strong>"Delivered" is defined by timestamp, not status.</strong> 8 orders are marked delivered with no delivery date. They stay in the table but drop out of the time-based questions.</li>
+        <li><strong>Reviews are aggregated per order before joining.</strong> 547 orders carry multiple reviews, so a direct join would fan out. This was the one data issue that changed the mart design.</li>
+        <li><strong>Orders are the spine, with left joins.</strong> 775 orders have no items. An inner join would drop them and bring back survivor bias.</li>
+        <li><strong>Minimum-volume thresholds on category risk.</strong> Rates on tiny samples are noise, not risk, so categories need at least 250 order-lines.</li>
+    </ul>
+
     <h2>Limitations</h2>
+    <ul>
+        <li>Correlation, not causation: the link between lateness and review scores is observed, not proven.</li>
+        <li>The category and seller analysis is measured at order-line level, not order level.</li>
+        <li>The stuck rate has no order-age cutoff, so recent orders still in transit may be counted as stuck.</li>
+        <li>Day counts are truncated to full 24-hour units, so "on-time" can include orders that arrived less than a day early.</li>
+    </ul>
+    <p>Code, SQL and documentation: <a href="https://github.com/LeonTran29/Project_Olist">github.com/LeonTran29/Project_Olist</a>.</p>
 </body>
 </html>
